@@ -205,10 +205,52 @@ public class PlaylistOOP {
 
     public static void main(String[] args) {
 
-        // Membuat objek Lagu menggunakan constructor
-        Lagu lagu1 = new Lagu("Satu-Satu", "Idgitaf", 3.25);
+        // Array digunakan untuk menyimpan kumpulan objek Lagu (struktur data utama)
+        Lagu[] playlist = new Lagu[10];
 
-        // Menampilkan informasi lagu
-        lagu1.tampilkanInfo();
+        // Membuat objek Admin dan Member (turunan dari User)
+        Admin admin = new Admin("Bahlil");
+        Member member = new Member("Gibran");
+
+        System.out.println("======================================");
+        System.out.println(" Perbedaan Method tampilkanAkses() untuk admin dan member");
+        System.out.println("======================================");
+        // POLYMORPHISM: kedua objek dipanggil melalui referensi tipe User,
+        // namun method tampilkanAkses() yang dijalankan berbeda sesuai
+        // objek aslinya (Admin atau Member) -> runtime polymorphism.
+        User[] users = { admin, member };
+        for (User u : users) {
+            u.tampilkanAkses();
+        }
+
+        System.out.println("\n======================================");
+        System.out.println(" ADMIN: MENAMBAHKAN LAGU KE PLAYLIST");
+        System.out.println("======================================");
+        admin.tambahLagu(playlist, new Lagu("Satu-Satu", "Idgitaf", 3.25));
+        admin.tambahLagu(playlist, new Lagu("Tak Segampang Itu", "Anggi Marito", 4.10));
+        admin.tambahLagu(playlist, new Lagu("Lathi", "Weird Genius", 3.05));
+        admin.tambahLagu(playlist, new Lagu("Bandarasa", "Sal Priadi", 3.50));
+
+        System.out.println("\n======================================");
+        System.out.println(" ADMIN: MELIHAT DAFTAR LAGU");
+        System.out.println("======================================");
+        admin.lihatDaftarLagu(playlist);
+
+        System.out.println("\n======================================");
+        System.out.println(" MEMBER: MELIHAT DAFTAR LAGU");
+        System.out.println("======================================");
+        member.lihatDaftarLagu(playlist);
+
+        System.out.println("\n======================================");
+        System.out.println(" MEMBER: MENCARI LAGU BERDASARKAN JUDUL");
+        System.out.println("======================================");
+        member.cariLaguByJudul(playlist, "Lathi");
+        member.cariLaguByJudul(playlist, "Lagu Tidak Ada");
+
+        System.out.println("\n======================================");
+        System.out.println(" MEMBER: MENGHITUNG RATA-RATA DURASI");
+        System.out.println("======================================");
+        double rataRata = member.hitungRataRataDurasi(playlist);
+        System.out.printf("Rata-rata durasi lagu dalam playlist: %.2f menit%n", rataRata);
     }
 }

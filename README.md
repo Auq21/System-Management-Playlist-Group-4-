@@ -25,10 +25,10 @@ Class `Lagu` merepresentasikan setiap lagu dengan atribut `judul`, `artis`, `dur
 **Polymorphism**: Method `tampilkanAkses()` di-override berbeda oleh `Admin` dan `Member` (ditandai `@Override`). Ini adalah *runtime polymorphism* — dibuktikan lewat `User[] users = { admin, member }` di `main()`, di mana method yang dijalankan tetap mengikuti tipe objek asli meski diakses lewat referensi tipe `User`.
 
 ## Cara Menjalankan
-\`\`\`
+```
 javac PlaylistOOP.java
 java PlaylistOOP
-\`\`\`
+```
 
 ## Tautan
 - File utama: [PlaylistOOP.java](./PlaylistOOP.java)

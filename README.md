@@ -32,3 +32,6 @@ java PlaylistOOP
 
 ## Tautan
 - File utama: [PlaylistOOP.java](./PlaylistOOP.java)
+
+## Screenshot Hasil Eksekusi
+![Hasil Eksekusi](Hasil-Eksekusi.png)

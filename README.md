@@ -34,4 +34,4 @@ java PlaylistOOP
 - File utama: [PlaylistOOP.java](./PlaylistOOP.java)
 
 ## Screenshot Hasil Eksekusi
-![Hasil Eksekusi](Hasil-Eksekusi.png)
+![Hasil Eksekusi](Hasil%20Eksekusi.png)

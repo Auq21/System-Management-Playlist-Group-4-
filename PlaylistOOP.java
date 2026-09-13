@@ -55,7 +55,7 @@ class Lagu {
     // Method untuk menampilkan informasi lengkap sebuah lagu
     public void tampilkanInfo() {
         System.out.println("Judul  : " + judul);
-        System.out.println("Artis   : " + artis);
+        System.out.println("Artis  : " + artis);
         System.out.println("Durasi : " + durasi + " menit");
     }
 }

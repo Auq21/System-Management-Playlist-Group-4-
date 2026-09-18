@@ -129,28 +129,46 @@ public class PlaylistArray {
     // Kompleksitas Waktu: O(1)
     public static void tambahLagu() {
         System.out.println("\n--- TAMBAH LAGU BARU ---");
+
+        // Cek apakah playlist sudah penuh
         if (jumlahLagu >= playlist.length) {
             System.out.println("Gagal menambahkan lagu. Playlist sudah penuh (Maksimal 10 lagu)!");
             return;
         }
 
         System.out.print("Masukkan Judul Lagu : ");
-        String judul = scanner.nextLine();
+        String judul = scanner.nextLine().trim();
         System.out.print("Masukkan Nama Artis : ");
-        String artis = scanner.nextLine();
-        System.out.print("Masukkan Durasi (menit): ");
-        
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Input durasi tidak valid! Masukkan angka: ");
-            scanner.next();
-        }
-        double durasi = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline
+        String artis = scanner.nextLine().trim();
 
+        // Validasi: judul dan artis tidak boleh kosong
+        if (judul.isEmpty() || artis.isEmpty()) {
+            System.out.println("Judul dan artis tidak boleh kosong. Penambahan dibatalkan.");
+            return;
+        }
+
+        // Input durasi dibaca sebagai teks lalu diubah ke angka, supaya format
+        // "4.10" maupun "4,10" sama-sama diterima (tidak tergantung locale)
+        System.out.print("Masukkan Durasi (menit): ");
+        double durasi;
+        while (true) {
+            try {
+                durasi = Double.parseDouble(scanner.nextLine().trim().replace(',', '.'));
+                if (durasi > 0) {
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                // input bukan angka, ulangi
+            }
+            System.out.print("Durasi tidak valid! Masukkan angka lebih dari 0: ");
+        }
+
+        // Simpan di posisi kosong pertama, lalu naikkan counter
         playlist[jumlahLagu] = new Lagu(judul, artis, durasi);
         jumlahLagu++;
 
         System.out.println("Berhasil! Lagu \"" + judul + "\" telah ditambahkan ke playlist.");
+        tampilkanSemuaLagu();
     }
 
     // 3. DELETION 
@@ -166,10 +184,10 @@ public class PlaylistArray {
         }
 
         System.out.print("Masukkan judul lagu yang ingin dihapus: ");
-        String judulHapus = scanner.nextLine();
+        String judulHapus = scanner.nextLine().trim();
 
         int indexDitemukan = -1;
-        // Cari posisi lagu yang akan dihapus
+        // Cari posisi lagu yang akan dihapus (linear search)
         for (int i = 0; i < jumlahLagu; i++) {
             if (playlist[i].getJudul().equalsIgnoreCase(judulHapus)) {
                 indexDitemukan = i;
@@ -186,6 +204,7 @@ public class PlaylistArray {
             jumlahLagu--;
 
             System.out.println("Berhasil! Lagu \"" + judulHapus + "\" telah dihapus.");
+            tampilkanSemuaLagu();
         } else {
             System.out.println("Lagu dengan judul \"" + judulHapus + "\" tidak ditemukan.");
         }
